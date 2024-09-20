@@ -18,6 +18,9 @@ public:
   size_t capacity() const;
   size_t size() const;
 
+  void resize(size_t n);
+  void reserve(size_t n);
+
   /* Add the value `v` at the back of the vector, reallocating if necessary. */
   void push_back(const T& v);
 
