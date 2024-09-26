@@ -2,10 +2,19 @@
 
 ## References
 
+### About C++
+
 * [cppreference](https://en.cppreference.com/w/): The best C++ online reference around.
 * [isocpp](https://isocpp.org/): Some blog posts about C++, tips and reference papers.
 * [Programming -- Principles and Practice Using C++ (3rd Edition)](https://www.stroustrup.com/programming.html): Book for C++ beginners.
 * [A Tour of C++, third edition](https://www.stroustrup.com/tour3.html): Book if you already know basics of C++, it covers C++20.
+
+### About Parallel Programming
+
+* [E. A. Lee, “The Problem with Threads”](https://digitalassets.lib.berkeley.edu/techreports/ucb/text/EECS-2006-1.pdf): A seminal paper on why shared-state parallelism is hard.
+* [The Art of Multiprocessor Programming](https://shop.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1): General introduction to parallelism.
+* [P. E. McKenney, “Is Parallel Programming Hard, And, If So, What Can You Do About It?”](https://cdn.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html): Advanced textbook on parallelism.
+
 
 ## C++ Crash Course
 
@@ -43,3 +52,19 @@ For instance, `fold_left(v, 0, [](int accu, int x) { return accu - x; })` return
 [More information](https://en.wikipedia.org/wiki/Fold_(higher-order_function)).
 3. [Optional⭐] Same as (2) but with `fold_right`, so it is from right to left. On the previous example, it returns `-2`.
 4. [Optional⭐] Rewrite the loops in `Rule184.cpp` using `map`. If it is not possible, introduce a new generic combinator similar to map to achieve your aim.
+
+## C++ Parallelism with std::thread
+
+### Map/Reduce
+
+* `2-std-thread/demo/parallel_map.cpp`: Do some experiments with different sizes of array. When is it interesting to have 2 threads? Why?
+* [Optional⭐] `2-std-thread/demo/parallel_map.cpp`: Extend `parallel_map` to any number of threads.
+* `2-std-thread/exercises/parallel_fold_left.cpp`: Implement `parallel_fold_left_commutative`  where 2 threads compute on half the array, wait for completion and then both results are merged. Note that the operation must be commutative otherwise you might not get the same result as in sequential computation.
+* [Optional⭐] `2-std-thread/exercises/parallel_fold_left.cpp`: Extend `parallel_fold_left` to any number of threads.
+* `2-std-thread/exercises/parallel_map_reduce.cpp`: Perform a map in parallel, followed by a fold. Find a (simple) way to reuse the threads from the map to compute the fold. Think about the pros and cons of your design, can we do better?
+
+### Histogram
+
+* `2-std-thread/exercises/histogram.cpp`: Given an array of size N taking value in the range [0,1000], implements a sequential algorithm `histogram_seq` which computes the frequency of each value and store the result in another array `histogram`.
+* Parallelize the algorithm using thread and mutex when writing in the histogram array.
+* [Optional⭐⭐] Lock-free algorithm: Use atomic to write values in the histogram, in order to avoid locks.
