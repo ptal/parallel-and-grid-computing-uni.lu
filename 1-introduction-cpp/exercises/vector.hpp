@@ -13,7 +13,7 @@ public:
   /* Destructor */
 
   /* allocate an array of size `n` filled with 0. */
-  vector(size_t n);
+  Vector(size_t n);
 
   size_t capacity() const;
   size_t size() const;
