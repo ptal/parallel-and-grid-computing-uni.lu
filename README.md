@@ -58,6 +58,7 @@ For instance, `fold_left(v, 0, [](int accu, int x) { return accu - x; })` return
 ### Map/Reduce
 
 * `2-std-thread/demo/parallel_map.cpp`: Do some experiments with different sizes of array. When is it interesting to have 2 threads? Why?
+* `2-std-thread/demo/parallel_map.cpp`: Use the function `more_work` and redo the experiments.
 * [Optional⭐] `2-std-thread/demo/parallel_map.cpp`: Extend `parallel_map` to any number of threads.
 * `2-std-thread/exercises/parallel_fold_left.cpp`: Implement `parallel_fold_left_commutative`  where 2 threads compute on half the array, wait for completion and then both results are merged. Note that the operation must be commutative otherwise you might not get the same result as in sequential computation.
 * [Optional⭐] `2-std-thread/exercises/parallel_fold_left.cpp`: Extend `parallel_fold_left` to any number of threads.
@@ -68,3 +69,13 @@ For instance, `fold_left(v, 0, [](int accu, int x) { return accu - x; })` return
 * `2-std-thread/exercises/histogram.cpp`: Given an array of size N taking value in the range [0,1000], implements a sequential algorithm `histogram_seq` which computes the frequency of each value and store the result in another array `histogram`.
 * Parallelize the algorithm using thread and mutex when writing in the histogram array.
 * [Optional⭐⭐] Lock-free algorithm: Use atomic to write values in the histogram, in order to avoid locks.
+
+### Project: Parallelizing Rule 184
+
+* Using the C++ threads, parallelize the simulation algorithm of Rule 184. Print only the final iteration and the size of the longest queue obtained.
+* The goal is to perform the most iterations in 1 minute for different values of the array.
+* Plot your results using Python or any tool to see the impact of 1, 2, ..., N threads on the efficiency according to the size of the array.
+* Discuss your results and design in a small PDF report.
+* Send the code and report in ".zip" before the next course begins (4th October 13h59) by email with the subject "[MHPC][PGC] Project".
+* You can discuss your design and your results on Discord or orally, but please don't share your code.
+* This is a solo project.

@@ -16,10 +16,8 @@ void parallel_map(std::vector<T>& values, auto f) {
   size_t mid = values.size() / 2;
   std::span half1(values.begin(), mid);
   std::span half2(values.begin() + mid, values.size() - mid);
-  std::thread a([&](){ map(half1, f); });
-  std::thread b([&](){ map(half2, f); });
-  a.join();
-  b.join();
+  std::jthread a([&](){ map(half1, f); });
+  std::jthread b([&](){ map(half2, f); });
 }
 
 std::vector<int> init_random_vector(size_t n) {
