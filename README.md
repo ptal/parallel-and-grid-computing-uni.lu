@@ -79,3 +79,28 @@ For instance, `fold_left(v, 0, [](int accu, int x) { return accu - x; })` return
 * Send the code and report in ".zip" before the next course begins (4th October 13h59) by email with the subject "[MHPC][PGC] Project".
 * You can discuss your design and your results on Discord or orally, but please don't share your code.
 * This is a solo project.
+
+## Synchronization Problems
+
+### [Optional⭐] Dining Philosophers Problem
+
+* Implement the dining philosopher for 2 philosophers by simply numbering the forks (you can read [this code](https://github.com/ffelten/ocaml-snippets/blob/main/shared_memory_II/bin/philosophers_lock.ml)).
+* Generalize your solutions for N philosophers.
+* Modify the algorithm to use coarse-grained locking.
+
+### Producer-consumer Problem
+
+* Implement a thread-safe version of `vector.cpp` (add a mutex as a private member, and use a `lock_guard` to guard the operations).
+* Suppose you have 1 thread consuming data from the vector (`pop_back`), and another thread producing data (`push_back`). Create two threads that produces and consumes integers. Is the class `vector` sufficient for this situation?
+* Create a `buffer` class wrapping a `vector` to solve with two methods `produce` and `consume`. Use a [semaphore](https://en.cppreference.com/w/cpp/thread/counting_semaphore) to synchronize in case the vector is empty.
+* With many consumers and producers, can this implementation be a bottleneck when parallelizing?
+* [Optional⭐] Add an upper limit on the size of the vector, so a producer will wait when the buffer is full.
+* [Optional⭐⭐] View the `vector` as a queue instead of a stack, so the first element produced will be consumed first (and not last like now).
+
+### [Optional⭐⭐] Reader-Writer Problem
+
+Suppose you have a shared resources (e.g. a web page) among many readers (e.g. the people browsing the web) and writers (e.g. the developers updating the page).
+
+* Implement a class with a method `read` and a method `write`. For the purpose of the exercise, the resource can simply be an integer.
+* Many readers can concurrently access the resource, but only one writer can modify the resource at a time (therefore no reader must be currently reading the resource).
+* Does your implementation take into account the problem of many readers, such that there is always at least a reader accessing the resource? What can you do about it?
