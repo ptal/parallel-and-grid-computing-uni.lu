@@ -64,7 +64,7 @@ int main(int argc, char **argv)
   std::mt19937 m{0};
   std::uniform_int_distribution<int> u{0, 1};
   size_t n = 50;
-  size_t steps = 50;
+  size_t steps = 30;
   std::vector<int> current = initialize_cells(n);
   std::vector<int> next(n);
   simulate(steps, current, next);
