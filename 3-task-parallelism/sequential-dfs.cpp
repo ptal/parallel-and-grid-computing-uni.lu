@@ -102,10 +102,10 @@ int main(int argc, char** argv) {
   }
 
   auto end = std::chrono::steady_clock::now();
-  auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
+  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
   // outputs
-  std::cout << "Time taken: " << duration.count() << " seconds" << std::endl;
+  std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
   std::cout << "Total solutions: " << exploredSol << std::endl;
   std::cout << "Size of the explored tree: " << exploredTree << std::endl;
 
