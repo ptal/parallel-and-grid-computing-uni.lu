@@ -9,18 +9,29 @@
 
 #include <iostream>
 #include <cstring>
+#include <utility>
+#include <vector>
 #include <chrono>
 #include <stack>
 
 // N-Queens node
 struct Node {
   int depth; // depth in the tree
-  int board[20]; // board configuration (permutation)
+  std::vector<int> board; // board configuration (permutation)
+
+  Node(size_t N): depth(0), board(N) {
+    for (int i = 0; i < N; i++) {
+      board[i] = i;
+    }
+  }
+  Node(const Node&) = default;
+  Node(Node&&) = default;
+  Node() = default;
 };
 
-// check if placing a queen is safe  (i.e., check if all the queens already placed share
+// check if placing a queen is safe (i.e., check if all the queens already placed share
 // a same diagonal)
-bool isSafe(const int* board, const int row, const int col)
+bool isSafe(const std::vector<int>& board, const int row, const int col)
 {
   for (int i = 0; i < row; ++i) {
     if (board[i] == col - row + i || board[i] == col + row - i) {
@@ -31,36 +42,26 @@ bool isSafe(const int* board, const int row, const int col)
   return true;
 }
 
-// swap function
-inline void swap(int* a, int* b)
-{
-  int tmp = *b;
-  *b = *a;
-  *a = tmp;
-}
-
 // evaluate a given node (i.e., check its board configuration) and branch it if it is valid
 // (i.e., generate its child nodes.)
-void evaluate_and_branch(const size_t N, const Node parent, std::stack<Node>* pool,
-  unsigned long long int* tree_loc, unsigned long long int* num_sol)
+void evaluate_and_branch(const Node& parent, std::stack<Node>& pool, size_t& tree_loc, size_t& num_sol)
 {
-  const int depth = parent.depth;
+  int depth = parent.depth;
+  int N = parent.board.size();
 
   // if the given node is a leaf, then update counter and do nothing
   if (depth == N) {
-    *num_sol += 1;
+    num_sol++;
   }
   // if the given node is not a leaf, then update counter and evaluate/branch it
   else {
     for (int j = depth; j < N; j++) {
       if (isSafe(parent.board, depth, parent.board[j])) {
-        Node child;
-        memcpy(child.board, parent.board, N * sizeof(int));
-        swap(&child.board[depth], &child.board[j]);
-        child.depth = depth + 1;
-        pool->push(child);
-
-        *tree_loc += 1;
+        Node child(parent);
+        std::swap(child.board[depth], child.board[j]);
+        child.depth++;
+        pool.push(std::move(child));
+        tree_loc++;
       }
     }
   }
@@ -78,32 +79,29 @@ int main(int argc, char** argv) {
   std::cout << "Solving " << N << "-Queens problem\n" << std::endl;
 
   // initialization of the root node (the board configuration where no queen is placed)
-  Node root;
-  root.depth = 0;
-  for (int i = 0; i < N; i++) {
-    root.board[i] = i;
-  }
+  Node root(N);
 
   // initialization of the pool of nodes (stack -> DFS exploration order)
   std::stack<Node> pool;
-  pool.push(root);
+  pool.push(std::move(root));
 
   // statistics to check correctness (number of nodes explored and number of solutions found)
-  unsigned long long int exploredTree = 0, exploredSol = 0;
+  size_t exploredTree = 0;
+  size_t exploredSol = 0;
 
   // beginning of the Depth-First tree-Search
-  auto start = std::chrono::high_resolution_clock::now();
+  auto start = std::chrono::steady_clock::now();
 
   while (pool.size() != 0) {
     // get a node from the pool
-    Node currentNode = pool.top();
+    Node currentNode(std::move(pool.top()));
     pool.pop();
 
     // check the board configuration of the node and branch it if it is valid.
-    evaluate_and_branch(N, currentNode, &pool, &exploredTree, &exploredSol);
+    evaluate_and_branch(currentNode, pool, exploredTree, exploredSol);
   }
 
-  auto end = std::chrono::high_resolution_clock::now();
+  auto end = std::chrono::steady_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::seconds>(end - start);
 
   // outputs
