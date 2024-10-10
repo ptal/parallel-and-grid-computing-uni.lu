@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "span": "cpp",
+        "thread": "cpp"
+    }
+}
