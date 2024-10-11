@@ -104,3 +104,20 @@ Suppose you have a shared resources (e.g. a web page) among many readers (e.g. t
 * Implement a class with a method `read` and a method `write`. For the purpose of the exercise, the resource can simply be an integer.
 * Many readers can concurrently access the resource, but only one writer can modify the resource at a time (therefore no reader must be currently reading the resource).
 * Does your implementation take into account the problem of many readers, such that there is always at least a reader accessing the resource? What can you do about it?
+
+## Task parallelism
+
+1. Execute the sequential code for N from 10 to 16 and note the number of explored nodes, the number of solutions and the execution time for each instance.
+2. Parallelize the sequential code following a single-pool multi-thread approach.
+
+*Hints:*
+- *The number of threads should be read from the command-line;*
+- *Threads (`std::thread`) should be stored in a `std::vector`;*
+- *Accesses to the pool must be protected with `std::mutex`.*
+3. Re-execute question 1. considering the parallel version implemented in 2. and varying the number of threads. What do you observe? Why?
+4. Extend the parallel version implemented in 2. using multiple pools (one pool per thread).
+
+*Hints:*
+- *The victim selection policy will be random (uniform);*
+- *The work stealing granularity will be "steal-half".*
+5. Re-execute question 1. considering the parallel version implemented in 4. and varying the number of threads. Compare with the results obtained in 3. What do you observe? Why?
