@@ -104,3 +104,19 @@ Suppose you have a shared resources (e.g. a web page) among many readers (e.g. t
 * Implement a class with a method `read` and a method `write`. For the purpose of the exercise, the resource can simply be an integer.
 * Many readers can concurrently access the resource, but only one writer can modify the resource at a time (therefore no reader must be currently reading the resource).
 * Does your implementation take into account the problem of many readers, such that there is always at least a reader accessing the resource? What can you do about it?
+
+## OpenMP
+
+### Map-reduce
+
+* `5-openmp/exercises/scalar_product.cpp`: Using OpenMP pragmas, parallelize the function `scalar_product`.
+* `5-openmp/exercises/reduction_min.cpp`: Write a parallel reduction function computing the minimum value.
+* `5-openmp/exercises/filter_leq.cpp`: Write a parallel function `filter_leq(v, k)` taking a vector `v` of integers and an integer `k` which returns a new array with the sum of all elements less or equal to `k` in `v`.
+
+### [Optional⭐] N-Queens
+
+* `5-openmp/exercises/nqueens.cpp`: Parallelize the N-queens code seen in the previous course using OpenMP tasks. Hint: check `5-openmp/demo/tasks_fib.cpp`.
+
+### Project Big Graph
+
+The project description is [available here](https://github.com/ptal/parallel-and-grid-computing-uni.lu/tree/main/5-openmp/project/README.md).
