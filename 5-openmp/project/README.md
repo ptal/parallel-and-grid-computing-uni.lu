@@ -4,14 +4,13 @@
 
 ### Rules
 
-* Send the code and report in "name.surname.biggraph.zip" before the next course begins (25th October 13h59) by email with the subject "[MHPC][PGC] BigGraph Project".
+* Send the code and report in "name.surname.biggraph.zip" before 1st November 23h59) by email with the subject "[MHPC][PGC] BigGraph Project".
 * This project accounts for 10% of the total grade.
 * Don't share your code.
 * This is a solo project.
 * Want a deadline extension?
-    - 1st November 13h59 with a penalty of 2 points (you will be graded over 18 points).
-    - 8th November 13h59 with a total penalty of 5 points (you will be graded over 15 points).
-    - 15th November 13h59 with a total penalty of 10 points (you will be graded over 10 points).
+    - 8th November 23h59 with a total penalty of 5 points (you will be graded over 15 points).
+    - 15th November 23h59 with a total penalty of 10 points (you will be graded over 10 points).
 * Discuss your results and design in a small PDF report, in particular:
     - Run bfs_grader and insert a copy of the score table in your solutions.
     - Describe the process of optimizing your code:
@@ -26,7 +25,7 @@
 ./bfs_grader <PATH_TO_GRAPHS_DIRECTORY>
 ```
 your final grade will include more than just this "performance grade", including the report, the correctness (no datarace), and the code in general.
-Note that it is quite hard to get the full score according to this program.
+Note that it is quite hard to get the full score according to `bfs_grader`.
 
 ### Overview
 
