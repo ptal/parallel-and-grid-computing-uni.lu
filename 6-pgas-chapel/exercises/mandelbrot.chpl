@@ -1,6 +1,6 @@
 /*
  * Author: Guillaume HELBECQUE (Université du Luxembourg)
- * Date: 25/10/2024
+ * Date: 26/10/2024
  *
  * Description:
  * This sequential program computes a Mandelbrot set of given size and
@@ -92,7 +92,9 @@ proc main() {
   compute(im);
   timer.stop();
 
-  writeln("Serial computational time [s]: ", timer.elapsed());
+  writeln("Computation of Manderbrot set with ", N, " iterations and ",
+    height, " x ", width, " resolutions");
+  writeln("Elapsed time [s]: ", timer.elapsed());
 
   save_image(im);
 

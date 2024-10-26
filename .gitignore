@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# Chapel install
+*chapel-2.2.0MC
