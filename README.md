@@ -139,3 +139,26 @@ Suppose you have a shared resources (e.g. a web page) among many readers (e.g. t
 ### Project Big Graph
 
 The project description is [available here](https://github.com/ptal/parallel-and-grid-computing-uni.lu/tree/main/5-openmp/project/README.md).
+
+## Partitioned Global Address Space (Chapel)
+
+### Mandelbrot set computation (`6-pgas-chapel/mandelbrot_seq.chpl`)
+
+1. Install Chapel on your system using the provided script (it can take some minutes). Command:
+```
+cd 6-pgas-chapel/
+source chapel_install.sh
+```
+2. Read the introductory file [available here](https://github.com/ptal/parallel-and-grid-computing-uni.lu/tree/main/6-pgas-chapel/exercises/introduction.pdf).
+3. Implement a parallel approach where each thread computes a block made of
+contiguous lines of the global image. What do you observe in terms of speed-up compared to the sequential version?
+4. The goal is to improve the load balancing between threads. Implement a variant of the previous algorithm where each processor computes a block made of alternated lines. More precisely, we will assume that the *k*-th thread (*0 <= k < n*) takes in charge the lines indexed by *k + i n*.
+
+*Hints:*
+- *The number of threads `n` can be set in command-line using `CHPL_RT_NUM_THREADS_PER_LOCALE=n`;*
+- *Compile using the `--fast` optimization flag: `chpl --fast foo.chpl`;*
+- *You can verify that two images are similar using the output of `diff image1 image2`.*
+
+### [Optional⭐] N-Queens
+
+* `6-pgas-chapel/exercises/nqueens.chpl`: Parallelize the N-queens code seen in a previous course using Chapel.
