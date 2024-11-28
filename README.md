@@ -162,3 +162,27 @@ contiguous lines of the global image. What do you observe in terms of speed-up c
 ### [Optional⭐] N-Queens
 
 * `6-pgas-chapel/exercises/nqueens.chpl`: Parallelize the N-queens code seen in a previous course using Chapel.
+
+## MPI
+
+* `7-mpi/exercises/ping_pong.cpp`: Given `N` processes, we pair processes `(0,1), (2,3), ...` such that `0` sends "ping" to `1` which replies with "pong". This is repeated `num_ping_pong` times as specified by a program's argument.
+* `7-mpi/exercises/ping_pong_ring.cpp`: Given `N` processes organized in a ring, a process send "ping" to its right, receive "ping" from its left, send "pong" to its left and receive "pong" from its right. This is repeated `num_ping_pong` times as specified by a program's argument.
+* `7-mpi/exercises/stop_when.cpp`: Given 3 processes, process 1 and 2 waits for a random number of seconds, and afterwards they send a message to the process 0 (can use `MPI_ANY_SOURCE`). Once process 0 receives the message, it broadcasts a termination message to everybody, and all processes *immediately* stop.
+* `7-mpi/exercises/sum.cpp`: Suppose we have `N` processes. The process 0 generates a random array `arr`. Using `MPI_Scatter`, the array is distributed among the processes. They all compute the local sum of the array. Using `MPI_Reduce` we retrieve the global sum and print it in the process 0.
+* Read [this paper](http://www1.cs.columbia.edu/~sedwards/papers/kahn1974semantics.pdf) on Kahn network.
+
+### Project: Maze Creation and Testing
+
+In this project, you will develop a parallel algorithm which creates a maze and test how many paths can enter and exit the maze.
+
+* Use randomized depth-first search to create a maze, or with any technique of your choice (see [here](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_depth-first_search)).
+* Given the beginning and exit of the labyrinth, design three different algorithms with MPI (different communication and/or data-splitting strategies) finding *all different paths* in the labyrinth.
+* Compare the paths found (if the maze is small enough) or the number of paths found (otherwise) among the algorithms. You must obtain the same results, otherwise an algorithm is wrong.
+* Write a short report explaining the intuitions behind the three algorithms, and evaluate those algorithms on a set of generated maze (from small to large).
+* Give hypothesis on why an algorithm is working better than another.
+* The goal is to practice with MPI and different topologies/strategies. It is OK if your algorithm is slower than the others as long as you can explain why.
+* For students in the Master in HPC: it is mandatory to run some experiments on the HPC with the number of nodes >= 2.
+* The code you produce must be your own and *you cannot copy* an existing MPI algorithm from internet.
+* You can work in team of 3, each member must design and implement a different algorithm, and you must explicitly say in the report who wrote which algorithm.
+* Send the project before the exam at pierre.talbot@uni.lu with the subject "[MHPC][PGC] Project MPI".
+* *Optional*: Use the [Boost.MPI library](https://www.boost.org/doc/libs/1_86_0/doc/html/mpi.html) to create your application.
