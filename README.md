@@ -48,9 +48,9 @@ See the files in `demo/modular` for setting up a multi-files project with header
 1. `1-introduction-cpp/exercises/vector.hpp`: Implement a map function taking a vector and applying a function `f` to each of its component.
 Suppose an integer vector `v` with the values `1,-5,6`, then `map(v, [](int x) { return x * 2; })` modifies `v` in-place and double each value.
 2. `1-introduction-cpp/exercises/vector.hpp`: Implement a left-fold function (aka. "reduce") which takes a vector, an accumulator and a function `f`.
-For instance, `fold_left(v, 0, [](int accu, int x) { return accu - x; })` returns the value `2` (the difference of the integers in vector `v` from left to right).
+For instance, `fold_left(v, 0, [](int accu, int x) { return accu - x; })` returns the value `-2` (the difference of the integers in vector `v` from left to right).
 [More information](https://en.wikipedia.org/wiki/Fold_(higher-order_function)).
-3. [Optional⭐] Same as (2) but with `fold_right`, so it is from right to left. On the previous example, it returns `-2`.
+3. [Optional⭐] Same as (2) but with `fold_right`, so it is from right to left. On the previous example, it also returns `-2`.
 4. [Optional⭐] Rewrite the loops in `Rule184.cpp` using `map`. If it is not possible, introduce a new generic combinator similar to map to achieve your aim.
 
 ## C++ Parallelism with std::thread
